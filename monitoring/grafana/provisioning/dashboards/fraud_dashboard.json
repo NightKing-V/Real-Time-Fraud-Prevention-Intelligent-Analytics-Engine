@@ -15,7 +15,7 @@
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
@@ -31,14 +31,14 @@
       "type": "timeseries",
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
           "expr": "rate(transactions_processed_total[1m])",
           "legendFormat": "Transactions / sec"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
@@ -50,18 +50,23 @@
       "gridPos": { "h": 7, "w": 8, "x": 8, "y": 1 },
       "id": 2,
       "options": { "legend": { "displayMode": "list", "placement": "bottom" } },
-      "title": "Kafka Consumer Group Lag",
+      "title": "Batch Size & Ingestion Backlog",
       "type": "timeseries",
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum(kafka_consumergroup_lag{topic=\"transactions.incoming\"}) by (consumergroup)",
-          "legendFormat": "{{consumergroup}} Lag"
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+          "expr": "spark_batch_records_count",
+          "legendFormat": "Records per Batch (Batch Size)"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+          "expr": "sum(kafka_consumergroup_lag{topic=\"transactions.incoming\"}) or sum(kafka_consumergroup_lag) or vector(0)",
+          "legendFormat": "Kafka Consumer Lag"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
@@ -77,7 +82,7 @@
       "type": "timeseries",
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
           "expr": "spark_batch_processing_seconds",
           "legendFormat": "Batch Duration (s)"
         }
@@ -91,7 +96,7 @@
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "thresholds" },
@@ -115,14 +120,14 @@
       "type": "stat",
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
           "expr": "clamp_min((rate(fraud_alerts_total[1m]) / clamp_min(rate(transactions_processed_total[1m]), 0.001)) * 100, 0)",
           "legendFormat": "Fraud Ratio %"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
@@ -138,14 +143,14 @@
       "type": "timeseries",
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "Prometheus" },
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
           "expr": "rate(fraud_alerts_total[1m])",
           "legendFormat": "Alerts / sec"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },
@@ -160,9 +165,9 @@
       "type": "timeseries",
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "Prometheus" },
-          "expr": "sum(rate(fraud_probability_distribution_bucket[5m])) by (le)",
-          "legendFormat": "P <= {{le}}"
+          "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+          "expr": "sum(increase(fraud_probability_distribution_bucket[1m])) by (le)",
+          "legendFormat": "P <= {{le}} (1m count)"
         }
       ]
     }
@@ -176,5 +181,5 @@
   "timezone": "browser",
   "title": "Real-Time Fraud Prevention & Intelligent Analytics",
   "uid": "fraud-prevention-engine",
-  "version": 1
+  "version": 2
 }

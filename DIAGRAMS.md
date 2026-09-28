@@ -18,7 +18,7 @@ flowchart TD
         KAFKA["Apache Kafka 4.3 (KRaft)<br/>(:9092 PLAINTEXT)"]
         TOPIC_IN["Topic: transactions.incoming<br/>(Raw Event Stream)"]
         KAFKA_UI["Kafka UI Dashboard<br/>(:8085)"]
-        
+      
         NIFI -->|"Publish Standardized JSON"| TOPIC_IN
         TOPIC_IN --- KAFKA
         KAFKA --- KAFKA_UI
@@ -30,7 +30,7 @@ flowchart TD
         TRAIN["LightGBM Classifier<br/>(Training.ipynb)"]
         EVAL["Model Validation & Cost Matrix<br/>(Evaluation.ipynb: tau* = 0.10)"]
         MLFLOW["MLflow Tracking & Model Registry<br/>(:5000 Server / Postgres DB)"]
-        
+      
         DATA --> PRUNE
         PRUNE -->|"30 Reproducible Features"| TRAIN
         TRAIN -->|"Register Artifact"| MLFLOW
@@ -41,7 +41,7 @@ flowchart TD
         SPARK["Apache Spark 3.5.0 Structured Streaming<br/>(:4040 UI)"]
         UDF["Vectorized Arrow Pandas UDF<br/>(Categorical Alignment + <5ms Scoring)"]
         DECISION{"Decision Threshold<br/>(P_fraud >= 0.10)"}
-        
+      
         TOPIC_IN -->|"Micro-Batch Stream"| SPARK
         MLFLOW -.->|"Load Production Booster"| UDF
         SPARK --> UDF
@@ -51,7 +51,7 @@ flowchart TD
     subgraph SINKS["5. Dual-Sink Routing"]
         TOPIC_OUT["Topic: transactions.alerts<br/>(Blocked Event Payloads)"]
         BQ["Google Cloud BigQuery<br/>(fraud_analytics.transactions_log)"]
-        
+      
         DECISION -->|"is_fraud_alert == 1<br/>(BLOCK_AND_ALERT)"| TOPIC_OUT
         DECISION -->|"All Transactions<br/>(MLOps Archive)"| BQ
     end
@@ -61,7 +61,7 @@ flowchart TD
         S_PROM["Spark Embedded HTTP Server<br/>(:8000 /metrics)"]
         PROM["Prometheus TSDB<br/>(:9090 Scraping @ 5s)"]
         GRAF["Grafana Dashboard<br/>(:3000 Auto-Provisioned)"]
-        
+      
         KAFKA --> K_EXP
         SPARK --> S_PROM
         K_EXP -->|"Scrape Lag"| PROM
@@ -73,7 +73,7 @@ flowchart TD
     classDef secondary fill:#059669,stroke:#047857,color:#ffffff;
     classDef alert fill:#dc2626,stroke:#b91c1c,color:#ffffff;
     classDef storage fill:#d97706,stroke:#b45309,color:#ffffff;
-    
+  
     class GEN,NIFI,SPARK primary;
     class UDF,MLFLOW,TRAIN secondary;
     class TOPIC_OUT alert;
@@ -99,7 +99,7 @@ sequenceDiagram
     Note over Gen,NiFi: Ingestion Phase (<10ms)
     Gen->>NiFi: HTTP POST /contentListener (JSON Event)
     NiFi->>KIn: Produce to 'transactions.incoming'
-    
+  
     Note over Spark,ML: Real-Time Scoring Phase (<15ms)
     Spark->>KIn: Poll latest micro-batch
     Spark->>Spark: Parse JSON Schema & Extract Primitives
@@ -107,16 +107,16 @@ sequenceDiagram
     Spark->>Spark: Vectorized Feature Engineering (sin/cos, cents, interactions)
     Spark->>Spark: Align Pandas Categoricals against booster.pandas_categorical
     Spark->>Spark: Compute P(isFraud) per record
-    
+  
     Note over Spark,KAlert: Decision & Dual-Routing Phase (<25ms)
     alt Fraud Detected: P(isFraud) >= 0.10
         Spark->>KAlert: Produce Alert Payload (Key = tx_id, Value = JSON)
     else Legitimate Transaction: P(isFraud) < 0.10
         Spark->>Spark: Mark action = 'APPROVE'
     end
-    
+  
     Spark->>BQ: Direct append complete batch to transactions_log
-    
+  
     Note over Spark,Prom: Telemetry Scraping (Asynchronous @ 5s)
     Spark->>Prom: Expose Latency, Counts, Score Distribution (:8000)
     Prom->>Prom: Scrape Spark & Kafka Exporter
@@ -172,32 +172,32 @@ flowchart LR
 flowchart TD
     SCORE["Incoming Transaction Fraud Probability: P"]
     THRESH{"Decision Threshold<br/>tau* = 0.10"}
-    
+  
     SCORE --> THRESH
-    
+  
     subgraph ROUTE_ALERT["High-Risk Path"]
         BLOCK["Tag: BLOCK_AND_ALERT<br/>is_fraud_alert = 1"]
         K_ALERT["Publish to Kafka: transactions.alerts"]
         OPS["Downstream Incident Response<br/>& Real-time User SMS/2FA Challenge"]
-        
+      
         BLOCK --> K_ALERT
         K_ALERT --> OPS
     end
-    
+  
     subgraph ROUTE_APPROVE["Standard Path"]
         ALLOW["Tag: APPROVE<br/>is_fraud_alert = 0"]
         GATEWAY["Payment Gateway Settlement"]
-        
+      
         ALLOW --> GATEWAY
     end
-    
+  
     subgraph ARCHIVE["Dual-Sink Data Warehouse"]
         BQ["Google Cloud BigQuery<br/>fraud_analytics.transactions_log"]
         DRIFT["Model Drift & Continuous Training Pipeline"]
-        
+      
         BQ --> DRIFT
     end
-    
+  
     THRESH -->|">= 0.10 (Optimized for Cost Matrix)"| BLOCK
     THRESH -->|"< 0.10"| ALLOW
     BLOCK --> BQ
@@ -206,7 +206,7 @@ flowchart TD
     classDef alert fill:#dc2626,stroke:#991b1b,color:#ffffff;
     classDef approve fill:#16a34a,stroke:#15803d,color:#ffffff;
     classDef sink fill:#2563eb,stroke:#1d4ed8,color:#ffffff;
-    
+  
     class BLOCK,K_ALERT,OPS alert;
     class ALLOW,GATEWAY approve;
     class BQ,DRIFT sink;
