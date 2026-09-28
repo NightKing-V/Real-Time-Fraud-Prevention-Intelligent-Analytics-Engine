@@ -1,0 +1,118 @@
+# ==============================================================================
+# Datasets & Large Data Files
+# ==============================================================================
+ml/data/
+*.zip
+*.tar.gz
+*.tgz
+*.gz
+*.parquet
+*.feather
+*.h5
+*.csv
+*.tsv
+
+# ==============================================================================
+# Model Artifacts & MLflow Storage
+# ==============================================================================
+ml/artifacts/
+ml/mlruns/
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+*.bin
+*.model
+
+# ==============================================================================
+# Credentials, Secrets & Keys
+# ==============================================================================
+spark/config/credentials.json
+spark/config/*.json
+!spark/config/*.json.example
+*.pem
+*.key
+*.cert
+*.crt
+credentials.json
+client_secret*.json
+service_account*.json
+.env
+.env.*
+!.env.example
+
+# ==============================================================================
+# Spark Checkpoints & Ivy Cache
+# ==============================================================================
+spark/checkpoints/
+checkpoints/
+.ivy2/
+metastore_db/
+derby.log
+warehouse/
+
+# ==============================================================================
+# Python & Virtual Environments
+# ==============================================================================
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+*/.venv/
+venv/
+*/venv/
+env/
+*/env/
+ENV/
+
+# ==============================================================================
+# Jupyter Notebooks Checkpoints & Cache
+# ==============================================================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+*/.jupyter/
+
+# ==============================================================================
+# Operating System & IDE Artifacts
+# ==============================================================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==============================================================================
+# NiFi, Kafka, and Monitoring Local State / Logs
+# ==============================================================================
+nifi_data/
+nifi_state/
+kafka_data/
+logs/
+*.log
+prometheus_data/
+grafana_data/

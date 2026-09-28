@@ -33,14 +33,115 @@ services:
           memory: 4g
 
   kafka-ui:
-      image: provectuslabs/kafka-ui:latest
-      container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "8085:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local-cluster
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-broker:9092
+    depends_on:
+      - kafka
+
+  spark:
+    build: ./spark
+    container_name: spark-streaming
+    user: root
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/config/credentials.json
+      - GCP_PROJECT=white-cedar-510007-k2
+    ports:
+      - "4040:4040"
+      - "8000:8000"
+    volumes:
+      - ./spark/jobs:/app/jobs
+      - spark_ivy:/root/.ivy2
+      - ./ml:/home/jovyan/work
+      - ./spark/config:/app/config
+    command:
+      - /opt/spark/bin/spark-submit
+      - --packages
+      - org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,com.google.cloud.spark:spark-bigquery-with-dependencies_2.12:0.36.4
+      - /app/jobs/streaming_inference.py
+    depends_on:
+      - kafka
+      - mlflow
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    depends_on:
+      - kafka-exporter
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest
+    container_name: kafka-exporter
+    command: ["--kafka.server=kafka-broker:9092"]
+    ports:
+      - "9308:9308"
+    depends_on:
+      - kafka
+
+  postgres:
+    image: postgres:15
+    container_name: mlflow-db
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mlflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mlflow:
+      build: ./mlflow   # directory containing Dockerfile + requirements.txt
+      container_name: mlflow-server
       ports:
-        - "8085:8080"
-      environment:
-        - KAFKA_CLUSTERS_0_NAME=local-cluster
-        - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka-broker:9092
+        - "5000:5000"
+      depends_on:
+        - postgres
+      volumes:
+        - mlflow_artifacts:/mlflow/artifacts
+        - ./ml:/home/jovyan/work
+
+  jupyter:
+    image: jupyter/pyspark-notebook:latest
+    container_name: jupyter-sandbox
+    ports:
+      - "8888:8888"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    volumes:
+      - ./ml:/home/jovyan/work
+
 volumes:
   kafka_data:
   nifi_data:
   nifi_state:
+  spark_ivy:
+  postgres_data:
+  mlflow_artifacts:
+  prometheus_data:
+  grafana_data:

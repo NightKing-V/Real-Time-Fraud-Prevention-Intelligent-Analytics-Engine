@@ -1,0 +1,611 @@
+{
+    "flowContents": {
+        "identifier": "e9bfa2c6-5226-3277-87f0-c800132e6ed2",
+        "instanceIdentifier": "dd61f695-01a0-1000-e693-9be2bea312bb",
+        "name": "NiFi Flow",
+        "comments": "",
+        "position": {
+            "x": 0.0,
+            "y": 0.0
+        },
+        "processGroups": [],
+        "remoteProcessGroups": [],
+        "processors": [
+            {
+                "identifier": "094dfac2-c6de-3477-aaee-d071d9991c65",
+                "instanceIdentifier": "dd8ca919-01a0-1000-464f-faae966165f2",
+                "name": "ListenHTTP - Transactions",
+                "comments": "",
+                "position": {
+                    "x": 16.0,
+                    "y": 72.0
+                },
+                "type": "org.apache.nifi.processors.standard.ListenHTTP",
+                "bundle": {
+                    "group": "org.apache.nifi",
+                    "artifact": "nifi-standard-nar",
+                    "version": "2.12.0"
+                },
+                "properties": {
+                    "HTTP Headers for Attributes": null,
+                    "Multipart Request Max Size": "1 MB",
+                    "Authorized Issuer DN Pattern": ".*",
+                    "Listening Port for Health Check Requests": null,
+                    "Request Header Maximum Size": "8 KB",
+                    "Maximum Thread Pool Size": "200",
+                    "Multipart Read Buffer Size": "512 KB",
+                    "Record Reader": null,
+                    "HTTP Protocols": "HTTP_1_1",
+                    "Authorized Subject DN Pattern": ".*",
+                    "Base Path": "contentListener",
+                    "SSL Context Service": null,
+                    "Max Unconfirmed Flowfile Time": "60 secs",
+                    "Return Code": "200",
+                    "Record Writer": null,
+                    "Listening Port": "8082",
+                    "Client Authentication": "AUTO"
+                },
+                "propertyDescriptors": {
+                    "HTTP Headers for Attributes": {
+                        "name": "HTTP Headers for Attributes",
+                        "displayName": "HTTP Headers for Attributes",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Multipart Request Max Size": {
+                        "name": "Multipart Request Max Size",
+                        "displayName": "Multipart Request Max Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Authorized Issuer DN Pattern": {
+                        "name": "Authorized Issuer DN Pattern",
+                        "displayName": "Authorized Issuer DN Pattern",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Listening Port for Health Check Requests": {
+                        "name": "Listening Port for Health Check Requests",
+                        "displayName": "Listening Port for Health Check Requests",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false,
+                        "listenPortDefinition": {
+                            "transportProtocol": "TCP",
+                            "applicationProtocols": [
+                                "http/1.1",
+                                "h2"
+                            ]
+                        }
+                    },
+                    "Request Header Maximum Size": {
+                        "name": "Request Header Maximum Size",
+                        "displayName": "Request Header Maximum Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Maximum Thread Pool Size": {
+                        "name": "Maximum Thread Pool Size",
+                        "displayName": "Maximum Thread Pool Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Multipart Read Buffer Size": {
+                        "name": "Multipart Read Buffer Size",
+                        "displayName": "Multipart Read Buffer Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Record Reader": {
+                        "name": "Record Reader",
+                        "displayName": "Record Reader",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "HTTP Protocols": {
+                        "name": "HTTP Protocols",
+                        "displayName": "HTTP Protocols",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Authorized Subject DN Pattern": {
+                        "name": "Authorized Subject DN Pattern",
+                        "displayName": "Authorized Subject DN Pattern",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Base Path": {
+                        "name": "Base Path",
+                        "displayName": "Base Path",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "SSL Context Service": {
+                        "name": "SSL Context Service",
+                        "displayName": "SSL Context Service",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Max Unconfirmed Flowfile Time": {
+                        "name": "Max Unconfirmed Flowfile Time",
+                        "displayName": "Max Unconfirmed Flowfile Time",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Return Code": {
+                        "name": "Return Code",
+                        "displayName": "Return Code",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Record Writer": {
+                        "name": "Record Writer",
+                        "displayName": "Record Writer",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Listening Port": {
+                        "name": "Listening Port",
+                        "displayName": "Listening Port",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false,
+                        "listenPortDefinition": {
+                            "transportProtocol": "TCP",
+                            "applicationProtocols": [
+                                "http/1.1",
+                                "h2"
+                            ]
+                        }
+                    },
+                    "Client Authentication": {
+                        "name": "Client Authentication",
+                        "displayName": "Client Authentication",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    }
+                },
+                "style": {},
+                "schedulingPeriod": "0 sec",
+                "schedulingStrategy": "TIMER_DRIVEN",
+                "executionNode": "ALL",
+                "penaltyDuration": "30 sec",
+                "yieldDuration": "1 sec",
+                "bulletinLevel": "WARN",
+                "runDurationMillis": 0,
+                "concurrentlySchedulableTaskCount": 1,
+                "autoTerminatedRelationships": [],
+                "scheduledState": "ENABLED",
+                "retryCount": 10,
+                "retriedRelationships": [],
+                "backoffMechanism": "PENALIZE_FLOWFILE",
+                "maxBackoffPeriod": "10 mins",
+                "componentType": "PROCESSOR",
+                "groupIdentifier": "e9bfa2c6-5226-3277-87f0-c800132e6ed2"
+            },
+            {
+                "identifier": "1130299d-4878-3a40-b9ba-7d49c327728b",
+                "instanceIdentifier": "ddadda77-01a0-1000-21e8-836d31a95699",
+                "name": "PublishKafka",
+                "comments": "",
+                "position": {
+                    "x": 812.0,
+                    "y": 86.0
+                },
+                "type": "org.apache.nifi.kafka.processors.PublishKafka",
+                "bundle": {
+                    "group": "org.apache.nifi",
+                    "artifact": "nifi-kafka-nar",
+                    "version": "2.12.0"
+                },
+                "properties": {
+                    "compression.type": "none",
+                    "acks": "1",
+                    "Message Demarcator": null,
+                    "Kafka Key Attribute Encoding": "utf-8",
+                    "Record Reader": null,
+                    "Record Metadata Strategy": "FROM_PROPERTIES",
+                    "Transactional ID Prefix": null,
+                    "Header Encoding": "UTF-8",
+                    "max.request.size": "1 MB",
+                    "Topic Name": "transactions.incoming",
+                    "Kafka Key": null,
+                    "partition": null,
+                    "Kafka Connection Service": "0ee9e0ea-b439-3110-9bb9-b6377854249f",
+                    "Publish Strategy": "USE_VALUE",
+                    "Record Key Writer": null,
+                    "Failure Strategy": "Route to Failure",
+                    "partitioner.class": "org.apache.kafka.clients.producer.internals.DefaultPartitioner",
+                    "Record Writer": null,
+                    "Transactions Enabled": "false",
+                    "Message Key Field": null,
+                    "FlowFile Attribute Header Pattern": null
+                },
+                "propertyDescriptors": {
+                    "compression.type": {
+                        "name": "compression.type",
+                        "displayName": "Compression Type",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "acks": {
+                        "name": "acks",
+                        "displayName": "Delivery Guarantee",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Message Demarcator": {
+                        "name": "Message Demarcator",
+                        "displayName": "Message Demarcator",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Kafka Key Attribute Encoding": {
+                        "name": "Kafka Key Attribute Encoding",
+                        "displayName": "Kafka Key Attribute Encoding",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Record Reader": {
+                        "name": "Record Reader",
+                        "displayName": "Record Reader",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Record Metadata Strategy": {
+                        "name": "Record Metadata Strategy",
+                        "displayName": "Record Metadata Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Transactional ID Prefix": {
+                        "name": "Transactional ID Prefix",
+                        "displayName": "Transactional ID Prefix",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Header Encoding": {
+                        "name": "Header Encoding",
+                        "displayName": "Header Encoding",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "max.request.size": {
+                        "name": "max.request.size",
+                        "displayName": "Max Request Size",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Topic Name": {
+                        "name": "Topic Name",
+                        "displayName": "Topic Name",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Kafka Key": {
+                        "name": "Kafka Key",
+                        "displayName": "Kafka Key",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "partition": {
+                        "name": "partition",
+                        "displayName": "Partition",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Kafka Connection Service": {
+                        "name": "Kafka Connection Service",
+                        "displayName": "Kafka Connection Service",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Publish Strategy": {
+                        "name": "Publish Strategy",
+                        "displayName": "Publish Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Record Key Writer": {
+                        "name": "Record Key Writer",
+                        "displayName": "Record Key Writer",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Failure Strategy": {
+                        "name": "Failure Strategy",
+                        "displayName": "Failure Strategy",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "partitioner.class": {
+                        "name": "partitioner.class",
+                        "displayName": "Partitioner Class",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Record Writer": {
+                        "name": "Record Writer",
+                        "displayName": "Record Writer",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Transactions Enabled": {
+                        "name": "Transactions Enabled",
+                        "displayName": "Transactions Enabled",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "Message Key Field": {
+                        "name": "Message Key Field",
+                        "displayName": "Message Key Field",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "FlowFile Attribute Header Pattern": {
+                        "name": "FlowFile Attribute Header Pattern",
+                        "displayName": "FlowFile Attribute Header Pattern",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    }
+                },
+                "style": {},
+                "schedulingPeriod": "0 sec",
+                "schedulingStrategy": "TIMER_DRIVEN",
+                "executionNode": "ALL",
+                "penaltyDuration": "30 sec",
+                "yieldDuration": "1 sec",
+                "bulletinLevel": "WARN",
+                "runDurationMillis": 0,
+                "concurrentlySchedulableTaskCount": 1,
+                "autoTerminatedRelationships": [
+                    "success",
+                    "failure"
+                ],
+                "scheduledState": "ENABLED",
+                "retryCount": 10,
+                "retriedRelationships": [],
+                "backoffMechanism": "PENALIZE_FLOWFILE",
+                "maxBackoffPeriod": "10 mins",
+                "componentType": "PROCESSOR",
+                "groupIdentifier": "e9bfa2c6-5226-3277-87f0-c800132e6ed2"
+            }
+        ],
+        "inputPorts": [],
+        "outputPorts": [],
+        "connections": [
+            {
+                "identifier": "b68e3fa5-91a0-37e4-8681-cb0a80359090",
+                "instanceIdentifier": "ddaeaf54-01a0-1000-f64a-acf4eaebe148",
+                "name": "",
+                "source": {
+                    "id": "094dfac2-c6de-3477-aaee-d071d9991c65",
+                    "type": "PROCESSOR",
+                    "groupId": "e9bfa2c6-5226-3277-87f0-c800132e6ed2",
+                    "name": "ListenHTTP - Transactions",
+                    "comments": "",
+                    "instanceIdentifier": "dd8ca919-01a0-1000-464f-faae966165f2"
+                },
+                "destination": {
+                    "id": "1130299d-4878-3a40-b9ba-7d49c327728b",
+                    "type": "PROCESSOR",
+                    "groupId": "e9bfa2c6-5226-3277-87f0-c800132e6ed2",
+                    "name": "PublishKafka",
+                    "comments": "",
+                    "instanceIdentifier": "ddadda77-01a0-1000-21e8-836d31a95699"
+                },
+                "labelIndex": 0,
+                "zIndex": 1,
+                "selectedRelationships": [
+                    "success"
+                ],
+                "backPressureObjectThreshold": 10000,
+                "backPressureDataSizeThreshold": "1 GB",
+                "flowFileExpiration": "0 sec",
+                "prioritizers": [],
+                "bends": [],
+                "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+                "partitioningAttribute": "",
+                "loadBalanceCompression": "DO_NOT_COMPRESS",
+                "componentType": "CONNECTION",
+                "groupIdentifier": "e9bfa2c6-5226-3277-87f0-c800132e6ed2"
+            }
+        ],
+        "labels": [],
+        "funnels": [],
+        "controllerServices": [
+            {
+                "identifier": "0ee9e0ea-b439-3110-9bb9-b6377854249f",
+                "instanceIdentifier": "ddb35c70-01a0-1000-27f6-294d4e917dbf",
+                "name": "Kafka3ConnectionService",
+                "comments": "",
+                "type": "org.apache.nifi.kafka.service.Kafka3ConnectionService",
+                "bundle": {
+                    "group": "org.apache.nifi",
+                    "artifact": "nifi-kafka-3-service-nar",
+                    "version": "2.12.0"
+                },
+                "properties": {
+                    "ack.wait.time": "5 sec",
+                    "sasl.username": null,
+                    "max.poll.records": "10000",
+                    "bootstrap.servers": "kafka-broker:9092",
+                    "sasl.kerberos.service.name": null,
+                    "security.protocol": "PLAINTEXT",
+                    "SSL Context Service": null,
+                    "sasl.mechanism": "GSSAPI",
+                    "isolation.level": "read_committed",
+                    "oauth2-access-token-provider-service": null,
+                    "max.block.ms": "5 sec",
+                    "kerberos-user-service": null,
+                    "default.api.timeout.ms": "60 sec"
+                },
+                "propertyDescriptors": {
+                    "ack.wait.time": {
+                        "name": "ack.wait.time",
+                        "displayName": "Acknowledgment Wait Time",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "sasl.username": {
+                        "name": "sasl.username",
+                        "displayName": "SASL Username",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "max.poll.records": {
+                        "name": "max.poll.records",
+                        "displayName": "Max Poll Records",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "bootstrap.servers": {
+                        "name": "bootstrap.servers",
+                        "displayName": "Bootstrap Servers",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "sasl.kerberos.service.name": {
+                        "name": "sasl.kerberos.service.name",
+                        "displayName": "Kerberos Service Name",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "security.protocol": {
+                        "name": "security.protocol",
+                        "displayName": "Security Protocol",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "SSL Context Service": {
+                        "name": "SSL Context Service",
+                        "displayName": "SSL Context Service",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "sasl.mechanism": {
+                        "name": "sasl.mechanism",
+                        "displayName": "SASL Mechanism",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "isolation.level": {
+                        "name": "isolation.level",
+                        "displayName": "Transaction Isolation Level",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "oauth2-access-token-provider-service": {
+                        "name": "oauth2-access-token-provider-service",
+                        "displayName": "OAuth2 Access Token Provider Service",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "max.block.ms": {
+                        "name": "max.block.ms",
+                        "displayName": "Max Metadata Wait Time",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "kerberos-user-service": {
+                        "name": "kerberos-user-service",
+                        "displayName": "Kerberos User Service",
+                        "identifiesControllerService": true,
+                        "sensitive": false,
+                        "dynamic": false
+                    },
+                    "sasl.password": {
+                        "name": "sasl.password",
+                        "displayName": "SASL Password",
+                        "identifiesControllerService": false,
+                        "sensitive": true,
+                        "dynamic": false
+                    },
+                    "default.api.timeout.ms": {
+                        "name": "default.api.timeout.ms",
+                        "displayName": "Client Timeout",
+                        "identifiesControllerService": false,
+                        "sensitive": false,
+                        "dynamic": false
+                    }
+                },
+                "controllerServiceApis": [
+                    {
+                        "type": "org.apache.nifi.kafka.service.api.KafkaConnectionService",
+                        "bundle": {
+                            "group": "org.apache.nifi",
+                            "artifact": "nifi-kafka-service-api-nar",
+                            "version": "2.12.0"
+                        }
+                    }
+                ],
+                "scheduledState": "DISABLED",
+                "bulletinLevel": "WARN",
+                "componentType": "CONTROLLER_SERVICE",
+                "groupIdentifier": "e9bfa2c6-5226-3277-87f0-c800132e6ed2"
+            }
+        ],
+        "defaultFlowFileExpiration": "0 sec",
+        "defaultBackPressureObjectThreshold": 10000,
+        "defaultBackPressureDataSizeThreshold": "1 GB",
+        "scheduledState": "ENABLED",
+        "executionEngine": "INHERITED",
+        "maxConcurrentTasks": 1,
+        "statelessFlowTimeout": "1 min",
+        "flowFileConcurrency": "UNBOUNDED",
+        "flowFileOutboundPolicy": "STREAM_WHEN_AVAILABLE",
+        "componentType": "PROCESS_GROUP"
+    },
+    "externalControllerServices": {},
+    "parameterContexts": {},
+    "flowEncodingVersion": "1.0",
+    "parameterProviders": {},
+    "latest": false
+}
